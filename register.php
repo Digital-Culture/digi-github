@@ -42,7 +42,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
   if(count($errors)==0){
   
   //hash the password
-  $password = password_hash($password,PASSWORD_DEFAULT);
+  $password = password_hash($password1,PASSWORD_DEFAULT);
   
   //create a query string
   $query = "INSERT
@@ -52,7 +52,8 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
             ('$username', '$email', '$password',1,NOW())";
    $result = $connection->query($query);
    if($result==true){
-      echo "account created";
+      //echo "account created";
+       $message = "Account successfully created";
    }
    else{
       if($connection->errno == 1062){
@@ -78,7 +79,7 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
    include("includes/head.php");
    ?>
    <body>
-      
+        <?php include("includes/navigation.php"); ?>
        <div class="container">
             <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -127,9 +128,16 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
                             <?php echo $errors["password"]; ?>
                          </span>
                       </div>
+                      <p>Have an account? <a href="login.php">Sign-in</a></button> </p>
                       <div class="text-center">
                      <button type="submit" class="btn btn-default">Register</button>
                       </div>
+                      <?php
+          if($message){
+            echo "<div class=\"alert alert-success\">
+            $message</div>";
+          }
+          ?>
                     </form>
                   </div> 
                </div>
