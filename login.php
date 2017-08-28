@@ -42,6 +42,9 @@ if($_SERVER["REQUEST_METHOD"]=="POST"){
       $_SESSION["username"] = $username;
       $email = $user["email"];
       $_SESSION["email"] = $email;
+      //create account id as a session variable
+      $account_id = $user["id"];
+       $_SESSION["id"] = $account_id;
     }
   }
   else{
